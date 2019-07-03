@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>BZH的博客</title>
+  <title>ES6基础语法 | BZH的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BZH的博客">
-<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+  <meta name="description" content="常量ES5中常量声明要通过Object.defineProperty函数来实现，要将常量绑定在某个控件上 12345// 声明一个常量属性，绑定在window上，命名PI2，值为3.1415926, 不可写Object.defineProperty(window, &quot;PI2&quot;, &amp;#123;    value: 3.1415926,    writable: false, &amp;#125;)">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6基础语法">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/ES6基础语法/index.html">
 <meta property="og:site_name" content="BZH的博客">
+<meta property="og:description" content="常量ES5中常量声明要通过Object.defineProperty函数来实现，要将常量绑定在某个控件上 12345// 声明一个常量属性，绑定在window上，命名PI2，值为3.1415926, 不可写Object.defineProperty(window, &quot;PI2&quot;, &amp;#123;    value: 3.1415926,    writable: false, &amp;#125;)">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-03T02:23:01.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BZH的博客">
+<meta name="twitter:title" content="ES6基础语法">
+<meta name="twitter:description" content="常量ES5中常量声明要通过Object.defineProperty函数来实现，要将常量绑定在某个控件上 12345// 声明一个常量属性，绑定在window上，命名PI2，值为3.1415926, 不可写Object.defineProperty(window, &quot;PI2&quot;, &amp;#123;    value: 3.1415926,    writable: false, &amp;#125;)">
   
     <link rel="alternative" href="/atom.xml" title="BZH的博客" type="application/atom+xml">
   
@@ -166,33 +171,51 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-设计模式笔记————单例模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-ES6基础语法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/12/设计模式笔记————单例模式/">设计模式笔记————单例模式</a>
+    <h1 class="article-title" itemprop="name">
+      ES6基础语法
     </h1>
   
 
         
-        <a href="/2019/03/12/设计模式笔记————单例模式/" class="archive-article-date">
-  	<time datetime="2019-03-12T05:29:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-12</time>
+        <a href="/2019/07/03/ES6基础语法/" class="archive-article-date">
+  	<time datetime="2019-07-03T02:21:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p><strong>单例模式：保证一个类只有一个实例，并提供一个方法访问它的全局访问点。</strong><br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/12/设计模式笔记————单例模式/#more">more >></a>
-        
+        <h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><p>ES5中常量声明要通过Object.defineProperty函数来实现，要将常量绑定在某个控件上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明一个常量属性，绑定在window上，命名PI2，值为3.1415926, 不可写</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">window</span>, <span class="string">"PI2"</span>, &#123;</span><br><span class="line">    value: <span class="number">3.1415926</span>,</span><br><span class="line">    writable: <span class="literal">false</span>, </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>ES6中，直接通过const关键字来定义常量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3.1415</span></span><br><span class="line"><span class="built_in">console</span>.log(PI)</span><br></pre></td></tr></table></figure>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>ES5中：<strong>for循环定义的var i 为全局变量</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callbacks = []</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= <span class="number">2</span>; i++) &#123;</span><br><span class="line">    callbacks[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> i * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.table([</span><br><span class="line">    callbacks[<span class="number">0</span>](),</span><br><span class="line">    callbacks[<span class="number">1</span>](),</span><br><span class="line">    callbacks[<span class="number">2</span>](),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">输出结果为  <span class="number">6</span>  <span class="number">6</span>  <span class="number">6</span></span><br><span class="line"><span class="built_in">console</span>.log(i)输出是<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span>循环中的<span class="keyword">var</span>是一个全局变量，闭包调用方法时，因为i=<span class="number">3</span>，利用i*<span class="number">2</span>计算出的值也就全是<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>ES6中：<strong>for循环定义的let j 为局部变量，作用域为 块{}</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callbacks2 = []</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= <span class="number">2</span>; j++) &#123;</span><br><span class="line">    callbacks2[j] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> j * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.table([</span><br><span class="line">    callbacks2[<span class="number">0</span>](),</span><br><span class="line">    callbacks2[<span class="number">1</span>](),</span><br><span class="line">    callbacks2[<span class="number">2</span>](),</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">输出结果为  <span class="number">0</span>  <span class="number">2</span>  <span class="number">4</span></span><br><span class="line"><span class="built_in">console</span>.log(j) 报错，j未定义</span><br><span class="line">这里<span class="keyword">for</span>循环中的 j 的作用域为 块作用域(即&#123;&#125;)，每循环一次，进入一次&#123;&#125;，变量j会保存一次</span><br><span class="line">闭包调用时，会调用它的执行过程中的 j 的当时值</span><br></pre></td></tr></table></figure>
+<hr>
+<p>ES5及之前，没有块作用域的概念，如果想要声明一个只能在固定区域内使用的函数，只能<strong>通过将逻辑全部包装在一个立即执行函数中</strong>的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"foo()===1"</span>, foo() === <span class="number">1</span>)<span class="comment">// true</span></span><br><span class="line">    <span class="comment">// 开辟新的作用域</span></span><br><span class="line">    ;((<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> foo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"foo()===2"</span>, foo() === <span class="number">2</span>)<span class="comment">// true</span></span><br><span class="line">    &#125;)())</span><br><span class="line">&#125;)()</span><br><span class="line">此时foo函数只能在各自的<span class="function"><span class="keyword">function</span>块内调用，程序不会报错，因为两个<span class="title">const</span> <span class="title">foo</span>函数是在不同的作用域内</span></span><br></pre></td></tr></table></figure>
+<p>ES6中：<strong>{}及代表一个块作用域</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"foo()===1"</span>, foo() === <span class="number">1</span>)<span class="comment">// true</span></span><br><span class="line">    <span class="comment">// 开辟新的作用域</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"foo()===2"</span>, foo() === <span class="number">2</span>)<span class="comment">// true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"foo()===1"</span>, foo() === <span class="number">1</span>)<span class="comment">// true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h1><p><strong>语法类似于Java中的Lambda表达式，箭头函数中的this是指向定义时的this</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ES3,ES5</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES3,ES5</span></span><br><span class="line">  <span class="keyword">var</span> factory = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = <span class="string">'a'</span>;</span><br><span class="line">    <span class="keyword">this</span>.b = <span class="string">'b'</span>;</span><br><span class="line">    <span class="keyword">this</span>.c = &#123;</span><br><span class="line">      a: <span class="string">'a+'</span>,</span><br><span class="line">      b: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.a <span class="comment">// 这里this发生变化，指向调用此function的对象</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span> factory().c.b());<span class="comment">// c调用的b()，所以this指向的是c</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">此时控制台输出b方法的值为 <span class="string">"a+"</span>，因为<span class="function"><span class="keyword">function</span>中的<span class="title">this</span>指向的是调用它的对象</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">ES6中</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> factory = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = <span class="string">'a'</span>;</span><br><span class="line">    <span class="keyword">this</span>.b = <span class="string">'b'</span>;</span><br><span class="line">    <span class="keyword">this</span>.c = &#123;</span><br><span class="line">      a: <span class="string">'a+'</span>,</span><br><span class="line">      b: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.a </span><br><span class="line">        <span class="comment">// b 在定义这个箭头函数时，this指向factory，所以箭头函数中的this也指向factory</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">new</span> factory().c.b());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">此时控制台输出b方法的值为a，箭头函数中的<span class="keyword">this</span>是指向定义时的<span class="keyword">this</span></span><br></pre></td></tr></table></figure>
+<h1 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h1><p><strong>ES6中的默认参数写法和C++相同</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ES5\ES3 默认参数的写法，需要自己进行判断是否使用默认参数</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES5\ES3 默认参数的写法，需要自己进行判断是否使用默认参数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x, y, z</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (y === <span class="literal">undefined</span>) &#123;</span><br><span class="line">      y = <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (z === <span class="literal">undefined</span>) &#123;</span><br><span class="line">      z = <span class="number">42</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> x + y + z</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(f(<span class="number">1</span>, <span class="number">3</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ES6 可变参数</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES6 可变参数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">checkParameter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'can\'t be empty'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">// 可以通过默认参数赋函数的方式，对传值是否为空进行检验</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x = checkParameter(</span>), <span class="title">y</span> = 7, <span class="title">z</span> = 42) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y + z</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    f() <span class="comment">// 触发checkParameter</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ES6中对可变参数的获取也变得简单，<strong>只需要使用扩展运算符(…)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">ES3,ES5 可变参数</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES3,ES5 可变参数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);<span class="comment">// 这里arguments就是传入的参数</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    a.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">      sum += item * <span class="number">1</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ES6 可变参数</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES6 可变参数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">...a</span>) </span>&#123; <span class="comment">// 只需要申明扩展运算符(...)，语义即为可变</span></span><br><span class="line">    <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">    a.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      sum += item * <span class="number">1</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(f(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">6</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">扩展运算符的其它用法</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES6 利用扩展运算符合并数组</span></span><br><span class="line">  <span class="keyword">var</span> params = [<span class="string">'hello'</span>, <span class="literal">true</span>, <span class="number">7</span>];</span><br><span class="line">  <span class="keyword">var</span> other = [</span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>, ...params</span><br><span class="line">  ];</span><br><span class="line">  <span class="built_in">console</span>.log(other);</span><br><span class="line">&#125;</span><br><span class="line">等价于</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES5 合并数组</span></span><br><span class="line">  <span class="keyword">var</span> params = [<span class="string">'hello'</span>, <span class="literal">true</span>, <span class="number">7</span>];</span><br><span class="line">  <span class="keyword">var</span> other = [<span class="number">1</span>, <span class="number">2</span>].concat(params);</span><br><span class="line">  <span class="built_in">console</span>.log(other);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="对象代理"><a href="#对象代理" class="headerlink" title="对象代理"></a>对象代理</h1><p><strong>对象代理用来解决没有私有变量的问题</strong>，对于一个变量只希望它在对象内部被使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">ES3数据保护</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES3数据保护</span></span><br><span class="line">  <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data = &#123; <span class="comment">// 通过类初始函数声明一个隐私的数据</span></span><br><span class="line">      name: <span class="string">'es3'</span>,</span><br><span class="line">      sex: <span class="string">'male'</span>,</span><br><span class="line">      age: <span class="number">15</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 声明getter、setter方法使外部对它操作</span></span><br><span class="line">    <span class="keyword">this</span>.get = <span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> data[key]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.set = <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (key !== <span class="string">'sex'</span>) &#123; <span class="comment">// 'sex'属性设置为只读</span></span><br><span class="line">        data[key] = value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ES5中可以采用声明常量绑定的方式</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES5中可以采用声明常量绑定的方式</span></span><br><span class="line">  <span class="keyword">var</span> Person = &#123;</span><br><span class="line">    name: <span class="string">'es5'</span>,</span><br><span class="line">    age: <span class="number">15</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 声明属性，绑定在Person对象上，属性名为'sex'，值为'male'，不可写</span></span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(Person, <span class="string">'sex'</span>, &#123;</span><br><span class="line">    writable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">'male'</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ES6中使用对象代理的方式</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ES6中使用对象代理的方式</span></span><br><span class="line">  <span class="keyword">let</span> Person = &#123;</span><br><span class="line">    name: <span class="string">'es6'</span>,</span><br><span class="line">    sex: <span class="string">'male'</span>,</span><br><span class="line">    age: <span class="number">15</span></span><br><span class="line">  &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 赋值一个代理类将原对象保护起来，代理对象为Person</span></span><br><span class="line">  <span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(Person, &#123;</span><br><span class="line">    <span class="keyword">get</span>(target, key) &#123;</span><br><span class="line">      <span class="keyword">return</span> target[key]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span>(target,key,value)&#123;</span><br><span class="line">      <span class="keyword">if</span>(key!==<span class="string">'sex'</span>)&#123;</span><br><span class="line">        target[key]=value;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.table(&#123;</span><br><span class="line">    name:person.name,</span><br><span class="line">    sex:person.sex,</span><br><span class="line">    age:person.age</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    person.sex=<span class="string">'female'</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -205,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -214,16 +237,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/12/设计模式笔记————单例模式/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/03/ES6基础语法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/02/Vue学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue学习笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -238,711 +320,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式笔记————组合模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/设计模式笔记————组合模式/">设计模式笔记————组合模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/11/设计模式笔记————组合模式/" class="archive-article-date">
-  	<time datetime="2019-03-11T11:33:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>组合模式：将对象组合成树形结构以表示“部分-整体”的层次结构。组合模式使得用户对单个对象和组合对象的使用具有一致性。</strong><br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————组合模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————组合模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常量"><span class="toc-number">1.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作用域"><span class="toc-number">2.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#箭头函数"><span class="toc-number">3.</span> <span class="toc-text">箭头函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#默认参数"><span class="toc-number">4.</span> <span class="toc-text">默认参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象代理"><span class="toc-number">5.</span> <span class="toc-text">对象代理</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-设计模式笔记————备忘录模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/设计模式笔记————备忘录模式/">设计模式笔记————备忘录模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/11/设计模式笔记————备忘录模式/" class="archive-article-date">
-  	<time datetime="2019-03-11T08:19:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>备忘录模式：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可以将该对象恢复到原先的状态。</strong><br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————备忘录模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————备忘录模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式笔记————状态模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/设计模式笔记————状态模式/">设计模式笔记————状态模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/11/设计模式笔记————状态模式/" class="archive-article-date">
-  	<time datetime="2019-03-11T04:32:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>状态模式：当一个对象的内在状态改变时允许改变其行为，这个对象看起来像是改变了其类</strong><br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————状态模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/11/设计模式笔记————状态模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-什么是字符串常量池？" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/什么是字符串常量池？/">什么是字符串常量池？</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/09/什么是字符串常量池？/" class="archive-article-date">
-  	<time datetime="2019-03-09T08:49:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@[TOC]</p>
-<h1 id="什么是字符串常量池？"><a href="#什么是字符串常量池？" class="headerlink" title="什么是字符串常量池？"></a>什么是字符串常量池？</h1><p>在理解字符串常量前，我们先熟悉一下如何创建一个字符串，在Java中有两种方法可以创建一个字符串对象：<br></p>
-        
-          <a class="article-more-a" href="/2019/03/09/什么是字符串常量池？/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/09/什么是字符串常量池？/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java编译期常量和运行时常量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/java编译期常量和运行时常量/">java编译期常量和运行时常量</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/09/java编译期常量和运行时常量/" class="archive-article-date">
-  	<time datetime="2019-03-09T08:06:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>常量：final修饰的变量<br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/09/java编译期常量和运行时常量/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/09/java编译期常量和运行时常量/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java中int和Integer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/09/java中int和Integer/">java中int和Integer</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/09/java中int和Integer/" class="archive-article-date">
-  	<time datetime="2019-03-09T07:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>int：与short、long、double、float、boolean、byte、char一样是基本数据类型。</p>
-<p>Integer：与Short、Long、Double、Float、Boolean、Byte、Character一样，是对应基本数据类型的包装类。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/09/java中int和Integer/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/09/java中int和Integer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java类的加载和对象创建流程详细分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/08/Java类的加载和对象创建流程详细分析/">Java类的加载和对象创建流程详细分析</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/08/Java类的加载和对象创建流程详细分析/" class="archive-article-date">
-  	<time datetime="2019-03-08T13:20:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@[TOC]<br>实例代码：<br></p>
-        
-          <a class="article-more-a" href="/2019/03/08/Java类的加载和对象创建流程详细分析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/08/Java类的加载和对象创建流程详细分析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式笔记————观察者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/07/设计模式笔记————观察者模式/">设计模式笔记————观察者模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/07/设计模式笔记————观察者模式/" class="archive-article-date">
-  	<time datetime="2019-03-07T11:56:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>观察者模式：定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己。</strong><br></p></blockquote>
-        
-          <a class="article-more-a" href="/2019/03/07/设计模式笔记————观察者模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/07/设计模式笔记————观察者模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式笔记————建造者模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/06/设计模式笔记————建造者模式/">设计模式笔记————建造者模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/03/06/设计模式笔记————建造者模式/" class="archive-article-date">
-  	<time datetime="2019-03-06T08:38:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>建造者模式：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</strong></p>
-</blockquote>
-<p>客户端只需指定需要建造的类型，具体建造的过程由建造者类（Director）完成。<br></p>
-        
-          <a class="article-more-a" href="/2019/03/06/设计模式笔记————建造者模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">设计模式笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/03/06/设计模式笔记————建造者模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -966,8 +369,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
