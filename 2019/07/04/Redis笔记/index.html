@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MyBatis学习笔记（9）------一级缓存 | BZH的博客</title>
+  <title>Redis笔记 | BZH的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一般提到 MyBatis 缓存都是指二级缓存，一级缓存（本地缓存）默认会启用，并且不能控制，因此很少会提到。 新建测试类：">
-<meta name="keywords" content="MyBatis">
+  <meta name="description" content="NoSQLNot Only SQL，非关系型数据库，主要分为四类：  键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化) 列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限) 文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法) 图形数据库：InfiniteGraph、Neo4j">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MyBatis学习笔记（9）------一级缓存">
-<meta property="og:url" content="http://yoursite.com/2019/02/12/MyBatis学习笔记（9）------一级缓存/index.html">
+<meta property="og:title" content="Redis笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/Redis笔记/index.html">
 <meta property="og:site_name" content="BZH的博客">
-<meta property="og:description" content="一般提到 MyBatis 缓存都是指二级缓存，一级缓存（本地缓存）默认会启用，并且不能控制，因此很少会提到。 新建测试类：">
+<meta property="og:description" content="NoSQLNot Only SQL，非关系型数据库，主要分为四类：  键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化) 列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限) 文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法) 图形数据库：InfiniteGraph、Neo4j">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-20T07:57:28.549Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/04/Redis笔记/C:/Users/BaiZehong/HexoInit/source/_posts/Redis笔记/1.png">
+<meta property="og:updated_time" content="2019-07-09T10:54:02.083Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBatis学习笔记（9）------一级缓存">
-<meta name="twitter:description" content="一般提到 MyBatis 缓存都是指二级缓存，一级缓存（本地缓存）默认会启用，并且不能控制，因此很少会提到。 新建测试类：">
+<meta name="twitter:title" content="Redis笔记">
+<meta name="twitter:description" content="NoSQLNot Only SQL，非关系型数据库，主要分为四类：  键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化) 列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限) 文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法) 图形数据库：InfiniteGraph、Neo4j">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/04/Redis笔记/C:/Users/BaiZehong/HexoInit/source/_posts/Redis笔记/1.png">
   
     <link rel="alternative" href="/atom.xml" title="BZH的博客" type="application/atom+xml">
   
@@ -171,34 +173,429 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MyBatis学习笔记（9）------一级缓存" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Redis笔记" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MyBatis学习笔记（9）------一级缓存
+      Redis笔记
     </h1>
   
 
         
-        <a href="/2019/02/12/MyBatis学习笔记（9）------一级缓存/" class="archive-article-date">
-  	<time datetime="2019-02-12T03:03:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
+        <a href="/2019/07/04/Redis笔记/" class="archive-article-date">
+  	<time datetime="2019-07-04T02:15:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一般提到 MyBatis 缓存都是指二级缓存，一级缓存（本地缓存）默认会启用，并且不能控制，因此很少会提到。</p>
-<p>新建测试类：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testL1Cache</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	SqlSession sqlSession = getSqlSession();</span><br><span class="line">	SysUser user1 = <span class="keyword">null</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">		<span class="comment">//查询id=1的用户</span></span><br><span class="line">		user1 = userMapper.selectById(<span class="number">1L</span>);</span><br><span class="line">		<span class="comment">//对当前获取的对象重新赋值</span></span><br><span class="line">		user1.setUserName(<span class="string">"new name"</span>);</span><br><span class="line">		<span class="comment">//再次查询id相同的用户</span></span><br><span class="line">		SysUser user2 = userMapper.selectById(<span class="number">1L</span>);</span><br><span class="line">		<span class="comment">//虽然没有更新数据库，但是这个用户名和user1重新赋值的名字相同</span></span><br><span class="line">		Assert.assertEquals(<span class="string">"new name"</span>, user2.getUserName());</span><br><span class="line">		<span class="comment">//user2和user1完全就是同一个实例</span></span><br><span class="line">		Assert.assertEquals(user1, user2);</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="comment">//关闭当前的sqlSession</span></span><br><span class="line">		sqlSession.close();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	System.out.println(<span class="string">"开启新的SqlSession"</span>);</span><br><span class="line">	<span class="comment">//开始另外一个新的session</span></span><br><span class="line">	sqlSession = getSqlSession();</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);</span><br><span class="line">		<span class="comment">//查询id=1的用户</span></span><br><span class="line">		SysUser user2 = userMapper.selectById(<span class="number">1L</span>);</span><br><span class="line">		<span class="comment">//第二个session获取的用户名仍然是admin</span></span><br><span class="line">		Assert.assertNotEquals(<span class="string">"new name"</span>, user2.getUserName());</span><br><span class="line">		<span class="comment">//这里的user2和前一个session查询的结果是两个不同的实例</span></span><br><span class="line">		Assert.assertNotEquals(user1, user2);</span><br><span class="line">		<span class="comment">//执行删除操作</span></span><br><span class="line">		userMapper.deleteUserById(<span class="number">1002L</span>);</span><br><span class="line">		<span class="comment">//获取user3</span></span><br><span class="line">		SysUser user3 = userMapper.selectById(<span class="number">1L</span>);</span><br><span class="line">		<span class="comment">//这里的user2和user3是两个不同的实例</span></span><br><span class="line">		Assert.assertNotEquals(user2, user3);</span><br><span class="line">	&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">		<span class="comment">//关闭sqlSession</span></span><br><span class="line">		sqlSession.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出日志：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from sys_user where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Long)</span><br><span class="line">TRACE [main] - &lt;==    Columns: id, user_name, user_password, user_info, create_time</span><br><span class="line">TRACE [main] - &lt;==        Row: 1, admin, 12345, &lt;&lt;BLOB&gt;&gt;, 2019-01-06 10:35:24.0</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br><span class="line">开启新的SqlSession</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from sys_user where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Long)</span><br><span class="line">TRACE [main] - &lt;==    Columns: id, user_name, user_password, user_info, create_time</span><br><span class="line">TRACE [main] - &lt;==        Row: 1, admin, 12345, &lt;&lt;BLOB&gt;&gt;, 2019-01-06 10:35:24.0</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: &#123;call delete_user_by_id(?)&#125; </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1002(Long)</span><br><span class="line">DEBUG [main] - &lt;==    Updates: 1</span><br><span class="line">DEBUG [main] - ==&gt;  Preparing: select * from sys_user where id = ? </span><br><span class="line">DEBUG [main] - ==&gt; Parameters: 1(Long)</span><br><span class="line">TRACE [main] - &lt;==    Columns: id, user_name, user_password, user_info, create_time</span><br><span class="line">TRACE [main] - &lt;==        Row: 1, admin, 12345, &lt;&lt;BLOB&gt;&gt;, 2019-01-06 10:35:24.0</span><br><span class="line">DEBUG [main] - &lt;==      Total: 1</span><br></pre></td></tr></table></figure>
-<p>在第一次执行 selectById 方法获取 SysUser 数据时，真正执行了数据库查询，得到了user1。第二次执行获取 user2 的时候，从日志可以看出，在”开启新的sqlSession“ 这行日志的上面，只有一次查询，也就是说第二次查询并没有执行数据库操作。从测试代码看，user1 重新设置了 userName 的值，之后没有进行数据库操作，后来获取的 user2 对象的 userName 值和重新设置后的值一样，user1 和 user2 是同一个对象。</p>
-<p><strong>MyBatis 的一级缓存存在于 SqlSession 的生命周期中，在同一个 sqlsession 中查询时，MyBtis 会把执行的方法和参数通过算法生成缓存的键值，将键值和查询结果存入一个 Map 中。如果同一个 SqlSession 中执行的方法和参数完全一致，那么会生成相同的键值，当 Map 缓存对象中已经存在该键值时，则返回缓存中的对象。</strong></p>
-<p>在第二个 SqlSession 中，又重新查询了 user2，user2 是一个新的实例，和user1没有关系，因为一级缓存是和 SqlSession 绑定的，只存在于 SqlSession 的生命周期中。</p>
-<p>接下来执行了一个 deleteById 操作，然后使用相同的方法和参数获取了 user3 实例，从日志和结果上看，user3 和 user2 也是完全不同的两个对象。<strong>这是因为任何的 INSERT、UPDATE、DELETE 操作都会清空一级缓存。</strong></p>
+        <h1 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h1><p>Not Only SQL，非关系型数据库，主要分为四类：</p>
+<ul>
+<li>键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化)</li>
+<li>列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限)</li>
+<li>文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法)</li>
+<li>图形数据库：InfiniteGraph、Neo4j<a id="more"></a>
+</li>
+</ul>
+<p><img src="/2019/07/04/Redis笔记/C:/Users\BaiZehong\HexoInit\source\_posts\Redis笔记\1.png" alt="1"></p>
+<p>传统的关系型数据库不能很好的应对高并发读写需求、海量数据的高效存储和访问需求、高扩展性和高可用性需求</p>
+<p><strong>Redis应用场景：缓存、任务队列、网站访问统计、数据过期处理、分布式集群架构中的session分离</strong></p>
+<p>Redis的工作模式：</p>
+<ul>
+<li>单线程</li>
+<li>阻塞式：同一时刻只处理一个请求</li>
+</ul>
+<p>优点：Redis本身没有并发问题</p>
+<p>缺点：不适合缓存100KB以上的对象</p>
+<h1 id="Redis安装和使用"><a href="#Redis安装和使用" class="headerlink" title="Redis安装和使用"></a>Redis安装和使用</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++   						安装gcc环境</span><br><span class="line"></span><br><span class="line">下载Redis.gz压缩包</span><br><span class="line">tar -zxvf Redis.gz</span><br><span class="line"><span class="built_in">cd</span> Redis/</span><br><span class="line">make                  						使用gcc编译</span><br><span class="line">make PREFIX=/usr/<span class="built_in">local</span>/redis5 install       安装redis到指定路径</span><br><span class="line">cp redis.conf /usr/<span class="built_in">local</span>/redis5 			将config文件拷贝到安装路径内</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/redis5  						里面有一个bin文件夹</span><br><span class="line"><span class="built_in">cd</span> bin/</span><br><span class="line"></span><br><span class="line">目录如下：</span><br><span class="line"></span><br><span class="line">[root@localhost bin]<span class="comment"># ll</span></span><br><span class="line">总用量 32736</span><br><span class="line">-rwxr-xr-x. 1 root root 4366592 7月   4 11:18 redis-benchmark		//性能测试工具</span><br><span class="line">-rwxr-xr-x. 1 root root 8111800 7月   4 11:18 redis-check-aof		//aof文件修复工具</span><br><span class="line">-rwxr-xr-x. 1 root root 8111800 7月   4 11:18 redis-check-rdb		//rdb文件检查工具</span><br><span class="line">-rwxr-xr-x. 1 root root 4806824 7月   4 11:18 redis-cli				//命令行的客户端</span><br><span class="line">lrwxrwxrwx. 1 root root      12 7月   4 11:18 redis-sentinel -&gt; redis-server</span><br><span class="line">-rwxr-xr-x. 1 root root 8111800 7月   4 11:18 redis-server			//服务器启动命令</span><br><span class="line"></span><br><span class="line">此时允许 ./redis-server 即启动redis</span><br><span class="line"></span><br><span class="line">可以将redis改为daemon守护进程的方式释放终端：</span><br><span class="line">vim redis.conf  </span><br><span class="line">找到GENERAL下面(大概在136行) 将 <span class="string">"daemonize no"</span> 改为 <span class="string">"daemonize yes"</span></span><br><span class="line"></span><br><span class="line">之后可以通过 ./bin/redis-server ./redis.conf 开启redis服务</span><br><span class="line">ps -ef | grep redis    可以查看到redis进程运行状态</span><br><span class="line"></span><br><span class="line">通过./redis-cli 进入命令行客户端</span><br><span class="line">可以通过 ./redis-cli shutdown 关闭redis服务</span><br></pre></td></tr></table></figure>
+<h1 id="Jedis"><a href="#Jedis" class="headerlink" title="Jedis"></a>Jedis</h1><p>是Redis的Java客户端开发包</p>
+<p>可以使用commons-pool2 连接池进行连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取连接池配置对象</span></span><br><span class="line">JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();</span><br><span class="line"><span class="comment">// 配置最大连接数</span></span><br><span class="line">config.setMaxTotal(<span class="number">30</span>);</span><br><span class="line"><span class="comment">// 配置最大空闲连接数</span></span><br><span class="line">config.setMaxIdle(<span class="number">10</span>);</span><br><span class="line"><span class="comment">// 获得连接池</span></span><br><span class="line">JedisPool jedisPool = <span class="keyword">new</span> JedisPool(config, host, port)</span><br><span class="line"><span class="comment">// 获得对象</span></span><br><span class="line">Jedis jedis = jedisPool.getResource();</span><br><span class="line"><span class="comment">// 释放资源</span></span><br><span class="line">jedis.close();</span><br><span class="line">jedisPool.close();</span><br></pre></td></tr></table></figure>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="字符串-String"><a href="#字符串-String" class="headerlink" title="字符串 String"></a>字符串 String</h2><p>使用二进制存储，Value最多可以容纳数据长度为512M</p>
+<p>命令：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">get/set key [value]</td>
+<td style="text-align:center">获取/设置</td>
+</tr>
+<tr>
+<td style="text-align:center">getset key value</td>
+<td style="text-align:center">先获取再设置</td>
+</tr>
+<tr>
+<td style="text-align:center">del key</td>
+<td style="text-align:center">删除key</td>
+</tr>
+<tr>
+<td style="text-align:center">keys *</td>
+<td style="text-align:center">查看所有存储</td>
+</tr>
+<tr>
+<td style="text-align:center">incr/decr key</td>
+<td style="text-align:center">某个key的值+1/-1，字符串不能累加和递减</td>
+</tr>
+<tr>
+<td style="text-align:center">incrby key [num]</td>
+<td style="text-align:center">某个key的值加num</td>
+</tr>
+<tr>
+<td style="text-align:center">append key1 key2</td>
+<td style="text-align:center">将key2追加到key1后面</td>
+</tr>
+</tbody>
+</table>
+<h2 id="哈希-Hash"><a href="#哈希-Hash" class="headerlink" title="哈希 Hash"></a>哈希 Hash</h2><p>命令和字符串相似，在所有命令之前加上‘h’ 并添加具体的MapName</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">hset MapName key value</td>
+<td style="text-align:center">存值</td>
+</tr>
+<tr>
+<td style="text-align:center">hmset MapName key1 value1 key2 value2…</td>
+<td style="text-align:center">一次存储到map中多个键值对</td>
+</tr>
+<tr>
+<td style="text-align:center">hget MapName key / hmget MapName key1 key2…</td>
+<td style="text-align:center">获取一个/获取多个</td>
+</tr>
+<tr>
+<td style="text-align:center">hgetall MapName</td>
+<td style="text-align:center">获取全部key-value</td>
+</tr>
+<tr>
+<td style="text-align:center">hdel MapName key1 key2….</td>
+<td style="text-align:center">删除</td>
+</tr>
+<tr>
+<td style="text-align:center">hexist MapName key</td>
+<td style="text-align:center">查看Map中key是否存在，返回 0/1</td>
+</tr>
+<tr>
+<td style="text-align:center">hlen MapName</td>
+<td style="text-align:center">查看Map中key的个数</td>
+</tr>
+<tr>
+<td style="text-align:center">hkeys MapName</td>
+<td style="text-align:center">获取全部key</td>
+</tr>
+<tr>
+<td style="text-align:center">hvals MapName</td>
+<td style="text-align:center">获取全部的value</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串列表-List"><a href="#字符串列表-List" class="headerlink" title="字符串列表 List"></a>字符串列表 List</h2><p>和数据结构中的List一样，有顺序性，<strong>类似LinkedList</strong>。插入时，如果该List不存在则新建一个List并插入；移除时，如果该List为空了则被删除。<strong>在首尾插入和删除效率较高</strong>，<strong>场景：队列</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">lpush ListName  val1 val2 val3..</td>
+<td style="text-align:center">左(首)侧插入，此时列表为[val3 val2 val1]</td>
+</tr>
+<tr>
+<td style="text-align:center">rpush ListName val1 val2 val3…</td>
+<td style="text-align:center">右(尾)侧插入,  此时列表为[val1 val2 val3]</td>
+</tr>
+<tr>
+<td style="text-align:center">lrange ListName start end</td>
+<td style="text-align:center">范围查询，start和end为要查看的开始下标和结尾下标，可以是负数,0代表第一个元素</td>
+</tr>
+<tr>
+<td style="text-align:center">lpop/rpop ListName</td>
+<td style="text-align:center">首/尾弹出</td>
+</tr>
+<tr>
+<td style="text-align:center">llen ListName</td>
+<td style="text-align:center">获取列表元素个数</td>
+</tr>
+<tr>
+<td style="text-align:center">lpushx ListName val..</td>
+<td style="text-align:center">如果该List存在则插入，不存在则不插入</td>
+</tr>
+<tr>
+<td style="text-align:center">lrem ListName count val</td>
+<td style="text-align:center">删除列表中元素：count代表删除个数(整数从头删,负数从尾删),val表示要删除的 value，如果count=0 则删除列表中全部的val。eg: lrem list1 -2 x 从list1尾部删除两个x</td>
+</tr>
+<tr>
+<td style="text-align:center">lset ListName index val</td>
+<td style="text-align:center">更改列表中index位置的值</td>
+</tr>
+<tr>
+<td style="text-align:center">linsert ListName before/after val1 val2</td>
+<td style="text-align:center">在列表中val1前/后的位置插入val2</td>
+</tr>
+<tr>
+<td style="text-align:center">rpoplpush ListName1 ListName2</td>
+<td style="text-align:center">从列表1中尾弹出元素，并将该元素在列表2首插入[通常用于生产-消费队列]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串集合-Set"><a href="#字符串集合-Set" class="headerlink" title="字符串集合 Set"></a>字符串集合 Set</h2><p><strong>Set不存储重复的元素</strong>，<strong>场景：统计访问人数、统计两个产品访问的交、并、差集</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">sadd SetName key…</td>
+<td style="text-align:center">添加元素</td>
+</tr>
+<tr>
+<td style="text-align:center">srem SetName key…</td>
+<td style="text-align:center">删除</td>
+</tr>
+<tr>
+<td style="text-align:center">smembers SetName</td>
+<td style="text-align:center">查看所有元素</td>
+</tr>
+<tr>
+<td style="text-align:center">sismember SetName key</td>
+<td style="text-align:center">查看key是否存在，返回0/1</td>
+</tr>
+<tr>
+<td style="text-align:center">sdiff Set1 Set2 [有顺序!]</td>
+<td style="text-align:center">求差集，Set1中有而Set2中没有元素</td>
+</tr>
+<tr>
+<td style="text-align:center">sinter Set1 Set2</td>
+<td style="text-align:center">求交集</td>
+</tr>
+<tr>
+<td style="text-align:center">sunion Set1 Set2</td>
+<td style="text-align:center">求并集</td>
+</tr>
+<tr>
+<td style="text-align:center">scard SetName</td>
+<td style="text-align:center">查看Set中的数量</td>
+</tr>
+<tr>
+<td style="text-align:center">srandmember SetName</td>
+<td style="text-align:center">随机返回一个元素</td>
+</tr>
+<tr>
+<td style="text-align:center">sdiffstore Set1 Set2 Set3</td>
+<td style="text-align:center">将Set2有同时Set3没有的，存储到Set1中</td>
+</tr>
+<tr>
+<td style="text-align:center">sinterstore Set1 Set2 Set3</td>
+<td style="text-align:center">将Set2和Set3的交集存到Set1中</td>
+</tr>
+</tbody>
+</table>
+<h2 id="有序字符串集合-Sorted-Set"><a href="#有序字符串集合-Sorted-Set" class="headerlink" title="有序字符串集合 Sorted Set"></a>有序字符串集合 Sorted Set</h2><p>Sorted Set中元素需要给出score(可重复)-value(不可重复)，根据分数进行排序，即位置是有序的。<strong>场景：游戏排名、微博热点话题</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">zadd SetName score1 val1 score2 val2…</td>
+<td style="text-align:center">根据score排序并存储val</td>
+</tr>
+<tr>
+<td style="text-align:center">zscore SetName val</td>
+<td style="text-align:center">获取val的分数</td>
+</tr>
+<tr>
+<td style="text-align:center">zcard SetName</td>
+<td style="text-align:center">获取set中的元素数量</td>
+</tr>
+<tr>
+<td style="text-align:center">zrem SetName val…</td>
+<td style="text-align:center">从Set中删除元素</td>
+</tr>
+<tr>
+<td style="text-align:center">zrange SetName start end</td>
+<td style="text-align:center">范围查询，不会显示分数</td>
+</tr>
+<tr>
+<td style="text-align:center">zrange SetName start end withscores</td>
+<td style="text-align:center">范围查询，同时显示分数</td>
+</tr>
+<tr>
+<td style="text-align:center">zrevrange SetName start end [withscores]</td>
+<td style="text-align:center">范围查询，反向排序显示</td>
+</tr>
+<tr>
+<td style="text-align:center">zrangebyscore SetName startScore endScore [limit 0 2]</td>
+<td style="text-align:center">范围查询，根据分数查</td>
+</tr>
+<tr>
+<td style="text-align:center">zremrangebyrank SetName start end</td>
+<td style="text-align:center">范围删除，根据排名来删</td>
+</tr>
+<tr>
+<td style="text-align:center">zremrangebyscore SetName startScore endScore</td>
+<td style="text-align:center">范围删除，根据分数来删</td>
+</tr>
+<tr>
+<td style="text-align:center">zincrby SetName num val</td>
+<td style="text-align:center">给val的分数增加num</td>
+</tr>
+<tr>
+<td style="text-align:center">zcount SetName startScore endScore</td>
+<td style="text-align:center">查询分数之间的个数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="keys通用操作"><a href="#keys通用操作" class="headerlink" title="keys通用操作"></a>keys通用操作</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">keys *</td>
+<td style="text-align:center">查看当前存储的所有key</td>
+</tr>
+<tr>
+<td style="text-align:center">keys k?</td>
+<td style="text-align:center">查看k开头的key存储</td>
+</tr>
+<tr>
+<td style="text-align:center">del key…</td>
+<td style="text-align:center">删除指定key</td>
+</tr>
+<tr>
+<td style="text-align:center">exists key</td>
+<td style="text-align:center">查询是否存在</td>
+</tr>
+<tr>
+<td style="text-align:center">rename oldKey newKey</td>
+<td style="text-align:center">重命名</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>expire key seconds</strong></td>
+<td style="text-align:center">设置key的过期时间</td>
+</tr>
+<tr>
+<td style="text-align:center">ttl key</td>
+<td style="text-align:center">查看key所剩时间，-1永不过期，-2已经过期</td>
+</tr>
+<tr>
+<td style="text-align:center">type key</td>
+<td style="text-align:center">获取key的类型</td>
+</tr>
+</tbody>
+</table>
+<h1 id="多数据库"><a href="#多数据库" class="headerlink" title="多数据库"></a>多数据库</h1><p><strong>一个Redis实例最多可提供16个数据库</strong>，客户端默认连接第0号。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">select [0…15]</td>
+<td style="text-align:center">切换数据库</td>
+</tr>
+<tr>
+<td style="text-align:center">move key  DBIndex （move mylist 1）</td>
+<td style="text-align:center">移动key到指定的数据库（移动mylist到第2个数据库）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>网络发生故障，则事务中的命令不会被提交</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">multi</td>
+<td style="text-align:center">开启事务，后续命令存到事务中执行</td>
+</tr>
+<tr>
+<td style="text-align:center">exec</td>
+<td style="text-align:center">提交(commit)事务，修改数据库</td>
+</tr>
+<tr>
+<td style="text-align:center">discard</td>
+<td style="text-align:center">回滚(rollback)事务</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Redis的持久化"><a href="#Redis的持久化" class="headerlink" title="Redis的持久化"></a>Redis的持久化</h2><p>Redis中的数据全部是存储在内存当中，所以每次开启时要将数据从磁盘中取出。</p>
+<p><strong>Redis有两种持久化方式：RDB方式，AOF方式</strong>。<strong>默认使用RDB的方式</strong></p>
+<blockquote>
+<p>RDB：在指定的时间间隔，将内存上的数据集快照写入到磁盘</p>
+<p>AOF：以日志的形式记录服务器处理的每一个操作，在Redis启动时，会读取日志然后构建数据库</p>
+<p>无持久化：不写入到磁盘中，充当缓存机制</p>
+</blockquote>
+<h3 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h3><ul>
+<li><p>优点：便于将数据取出，存储到别的地方。启动时需要分叉出一些进程，由子进程执行持久化操作。如果数据集很大，RDB比AOF效率高</p>
+</li>
+<li><p>缺点：不能最大限度的保证数据，因为按时间间隔备份。使用子进程备份，如果数据集过大，可能需要停止工作进行备份</p>
+<p>配置：vim redis.conf</p>
+<p>在143行左右，出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1                 每900秒至少有1个key发生变化，则持久化一次</span><br><span class="line">save 300 10				   每300秒至少有10个key发生变化，则持久化一次</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+<p>下面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dbfilename ****.rdb 持久化文件名</span><br><span class="line">dir ./   路径在当前目录</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h3><ul>
+<li><p>优势：日志采用追加的方式存储，即使宕机也不会破坏已存在的日志内容；</p>
+<p>即使写入一半失败，也可以redis-check-aof工具来解决数据一致性的问题；</p>
+<p>AOF包含格式清晰的日志文件记录所有修改操作</p>
+</li>
+<li><p>劣势：对于相同数量数据集，AOF文件比RDB文件大；</p>
+<p>效率低于RDB；</p>
+</li>
+</ul>
+<p>配置： vim redis.conf</p>
+<p>在510行左右，出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">appendonly no    AOF机制默认关闭</span><br><span class="line"></span><br><span class="line">同步策略：三选一</span><br><span class="line">#appendfsync always         每修改一次，同步到磁盘上</span><br><span class="line">appendfsync everysec  		每秒同步一次</span><br><span class="line">#appendfsync no				不同步</span><br></pre></td></tr></table></figure>
+<p>修改配置文件后需要重启redis</p>
+<h1 id="数量计数器"><a href="#数量计数器" class="headerlink" title="数量计数器"></a>数量计数器</h1><p>Redis中String类型的整数类型，可以作为数量计数器使用</p>
+<p>场景：</p>
+<ul>
+<li>频率控制：接口防刷，密码尝试次数限制</li>
+<li>数量统计：请求量统计</li>
+<li>数量控制：商品抢购，奖励额度控制</li>
+</ul>
+<p>常用命令：</p>
+<ul>
+<li><p>setnx 如果不存在，则设置…</p>
+</li>
+<li><p>incrby：为了防止并发问题，可以先incrby，再根据返回值判断是否到达阈值</p>
+</li>
+</ul>
 
       
 
@@ -212,7 +609,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">MyBatis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
         		</li>
       		
 		</ul>
@@ -268,7 +665,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/12/MyBatis学习笔记（9）------一级缓存/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/04/Redis笔记/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -282,18 +679,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/13/MyBatis学习笔记（10）------二级缓存/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MyBatis学习笔记（10）------二级缓存
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/09/MyBatis学习笔记（8）------使用枚举/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MyBatis学习笔记（8）------使用枚举</div>
+    <a href="/2019/07/03/ES6基础语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6基础语法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -320,7 +708,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NoSQL"><span class="toc-number">1.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis安装和使用"><span class="toc-number">2.</span> <span class="toc-text">Redis安装和使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jedis"><span class="toc-number">3.</span> <span class="toc-text">Jedis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构"><span class="toc-number">4.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串-String"><span class="toc-number">4.1.</span> <span class="toc-text">字符串 String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希-Hash"><span class="toc-number">4.2.</span> <span class="toc-text">哈希 Hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串列表-List"><span class="toc-number">4.3.</span> <span class="toc-text">字符串列表 List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串集合-Set"><span class="toc-number">4.4.</span> <span class="toc-text">字符串集合 Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序字符串集合-Sorted-Set"><span class="toc-number">4.5.</span> <span class="toc-text">有序字符串集合 Sorted Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keys通用操作"><span class="toc-number">4.6.</span> <span class="toc-text">keys通用操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多数据库"><span class="toc-number">5.</span> <span class="toc-text">多数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">5.1.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的持久化"><span class="toc-number">5.2.</span> <span class="toc-text">Redis的持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-number">5.2.1.</span> <span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-number">5.2.2.</span> <span class="toc-text">AOF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数量计数器"><span class="toc-number">6.</span> <span class="toc-text">数量计数器</span></a></li></ol>
                     </div>
                 </span>
             </div>
