@@ -17,7 +17,7 @@
 <meta property="og:description" content="NoSQLNot Only SQL，非关系型数据库，主要分为四类：  键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化) 列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限) 文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法) 图形数据库：InfiniteGraph、Neo4j">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/04/Redis笔记/C:/Users/BaiZehong/HexoInit/source/_posts/Redis笔记/1.png">
-<meta property="og:updated_time" content="2019-07-09T10:54:02.083Z">
+<meta property="og:updated_time" content="2019-07-17T02:56:52.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis笔记">
 <meta name="twitter:description" content="NoSQLNot Only SQL，非关系型数据库，主要分为四类：  键值对(key-value)存储：Redis(优点：快速查询，劣势：数据缺少结构化) 列存储：HBase(优点：快速查询、扩展性强，劣势：功能局限) 文档数据库：MongoDB(优点：数据结构要求不严格，劣势：性能低、缺少统一查询语法) 图形数据库：InfiniteGraph、Neo4j">
@@ -596,6 +596,7 @@
 <li><p>incrby：为了防止并发问题，可以先incrby，再根据返回值判断是否到达阈值</p>
 </li>
 </ul>
+<h1 id="Lua脚本"><a href="#Lua脚本" class="headerlink" title="Lua脚本"></a>Lua脚本</h1><p>Lua和事务的功能一样，也是解决并发问题。通过将命令打包到一块，一并提交到服务器的方式。</p>
 
       
 
@@ -679,6 +680,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/08/13/Quartz定时任务/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Quartz定时任务
+        
+      </div>
+    </a>
+  
   
     <a href="/2019/07/03/ES6基础语法/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">ES6基础语法</div>
@@ -708,7 +718,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NoSQL"><span class="toc-number">1.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis安装和使用"><span class="toc-number">2.</span> <span class="toc-text">Redis安装和使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jedis"><span class="toc-number">3.</span> <span class="toc-text">Jedis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构"><span class="toc-number">4.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串-String"><span class="toc-number">4.1.</span> <span class="toc-text">字符串 String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希-Hash"><span class="toc-number">4.2.</span> <span class="toc-text">哈希 Hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串列表-List"><span class="toc-number">4.3.</span> <span class="toc-text">字符串列表 List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串集合-Set"><span class="toc-number">4.4.</span> <span class="toc-text">字符串集合 Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序字符串集合-Sorted-Set"><span class="toc-number">4.5.</span> <span class="toc-text">有序字符串集合 Sorted Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keys通用操作"><span class="toc-number">4.6.</span> <span class="toc-text">keys通用操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多数据库"><span class="toc-number">5.</span> <span class="toc-text">多数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">5.1.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的持久化"><span class="toc-number">5.2.</span> <span class="toc-text">Redis的持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-number">5.2.1.</span> <span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-number">5.2.2.</span> <span class="toc-text">AOF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数量计数器"><span class="toc-number">6.</span> <span class="toc-text">数量计数器</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NoSQL"><span class="toc-number">1.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis安装和使用"><span class="toc-number">2.</span> <span class="toc-text">Redis安装和使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Jedis"><span class="toc-number">3.</span> <span class="toc-text">Jedis</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构"><span class="toc-number">4.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串-String"><span class="toc-number">4.1.</span> <span class="toc-text">字符串 String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希-Hash"><span class="toc-number">4.2.</span> <span class="toc-text">哈希 Hash</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串列表-List"><span class="toc-number">4.3.</span> <span class="toc-text">字符串列表 List</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串集合-Set"><span class="toc-number">4.4.</span> <span class="toc-text">字符串集合 Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有序字符串集合-Sorted-Set"><span class="toc-number">4.5.</span> <span class="toc-text">有序字符串集合 Sorted Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#keys通用操作"><span class="toc-number">4.6.</span> <span class="toc-text">keys通用操作</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多数据库"><span class="toc-number">5.</span> <span class="toc-text">多数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务"><span class="toc-number">5.1.</span> <span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis的持久化"><span class="toc-number">5.2.</span> <span class="toc-text">Redis的持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDB"><span class="toc-number">5.2.1.</span> <span class="toc-text">RDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOF"><span class="toc-number">5.2.2.</span> <span class="toc-text">AOF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数量计数器"><span class="toc-number">6.</span> <span class="toc-text">数量计数器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Lua脚本"><span class="toc-number">7.</span> <span class="toc-text">Lua脚本</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -821,11 +831,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,6 +844,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">后端开发</a>
               </li>
              
               <li class="article-tag-list-item">
